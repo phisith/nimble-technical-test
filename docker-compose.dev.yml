@@ -5,3 +5,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
