@@ -1,6 +1,13 @@
 import Button from "../../components/button";
+import { useModalSignUpHandler } from "../../hooks/useModalSignUpHandler";
+import {
+  ModalSignUp,
+  ModalSignUpProvider,
+} from "../../components/modals/modalSignUp";
+import React from "react";
 
 const SignIn = () => {
+  const { modalSignUpSwitcher } = useModalSignUpHandler();
   return (
     <>
       <div className={"h-full flex flex-col justify-center items-center"}>
@@ -20,17 +27,18 @@ const SignIn = () => {
             </p>
           </div>
           <form className={"flex w-full flex-col gap-6"}>
-            <div className={"flex flex-col shadow rounded"}>
+            <div className={"shadow rounded"}>
               <input
+                type={"text"}
                 className={
-                  "px-3 py-2 w-full border rounded-t rounded-b-none text-sm focus:border-violet-900 focus:outline-none focus:ring-violet-900"
+                  "px-3 py-2 relative w-full border border-gray-300 rounded-t rounded-b-none text-sm focus:z-10 focus:border-violet-900 focus:outline-none focus:ring-violet-900"
                 }
                 placeholder={"Username"}
               />
               <input
                 type={"password"}
                 className={
-                  "px-3 py-2 w-full border rounded-b rounded-t-none text-sm focus:border-violet-900 focus:outline-none"
+                  "px-3 py-2 relative w-full border border-gray-300 rounded-b rounded-t-none text-sm focus:z-10 focus:border-violet-900 focus:outline-none focus:ring-violet-900"
                 }
                 placeholder={"Password"}
               />
@@ -40,9 +48,14 @@ const SignIn = () => {
         </div>
         <div className={"bottom-0 flex items-center gap-4 py-6"}>
           <p className={"text-sm text-gray-600"}>Don't have an account?</p>
-          <Button title={"Sign up"} color={"clear"} />
+          <Button
+            title={"Sign up"}
+            color={"clear"}
+            action={() => modalSignUpSwitcher()}
+          />
         </div>
       </div>
+      <ModalSignUp />
     </>
   );
 };

@@ -12,9 +12,14 @@ const setColor = (color?: string) => {
 };
 const Button = (props: ButtonProps) => {
   return (
-    <button className={`${setColor(props.color)} px-3 py-2 rounded text-sm`}>
-      {props.title}
-    </button>
+    <>
+      <button
+        className={`${setColor(props.color)} px-3 py-2 rounded text-sm`}
+        onClick={(e) => props.action(e)}
+      >
+        {props.title}
+      </button>
+    </>
   );
 };
 export default Button;
