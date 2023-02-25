@@ -38,7 +38,7 @@ const SignIn = () => {
             <Button title={"Sign in"} />
           </form>
         </div>
-        <div className={"bottom-0 flex items-center gap-4 py-3"}>
+        <div className={"bottom-0 flex items-center gap-4 py-6"}>
           <p className={"text-sm text-gray-600"}>Don't have an account?</p>
           <Button title={"Sign up"} color={"clear"} />
         </div>
