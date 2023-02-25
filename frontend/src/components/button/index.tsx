@@ -14,8 +14,9 @@ const Button = (props: ButtonProps) => {
   return (
     <>
       <button
+        type={props?.type ? props.type : "button"}
         className={`${setColor(props.color)} px-3 py-2 rounded text-sm`}
-        onClick={(e) => props.action(e)}
+        onClick={(e) => (props?.type !== "submit" ? props.action(e) : null)}
       >
         {props.title}
       </button>
