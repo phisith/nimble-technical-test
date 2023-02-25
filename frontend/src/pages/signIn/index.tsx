@@ -3,17 +3,21 @@ import { useModalSignUpHandler } from "../../hooks/useModalSignUpHandler";
 import { ModalSignUp } from "../../components/modals/modalSignUp";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { modalSignUpSwitcher } = useModalSignUpHandler();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data: {}) => {
+    navigate("/homePage");
     console.log(data);
   };
+
   return (
     <>
       <div className={"h-full flex flex-col justify-center items-center"}>
