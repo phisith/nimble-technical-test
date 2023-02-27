@@ -1,5 +1,5 @@
-import ImportCSV from "../../components/controls/importCSV/ImportCSV";
 import PreviewKeywords from "../../components/preview/previewKeywords/PreviewKeywords";
+import ImportCSV from "../../components/importCSV/ImportCSV";
 
 const Home = () => {
   return (
