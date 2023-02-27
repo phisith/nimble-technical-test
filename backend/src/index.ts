@@ -1,12 +1,19 @@
-import express, {Express, Request, Response} from "express";
+import express, {Express} from "express";
+import cors from "cors"
+import {router} from "./routes/index.js";
 
 const app: Express = express()
 const PORT = process.env.BACKEND_PORT
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello Candy from Express TS");
-});
+app.use(cors(corsOptions))
+
+app.use("/", router)
 
 app.listen(PORT, () => {
     console.log(`now Listening on port ${PORT}`);
