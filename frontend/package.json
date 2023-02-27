@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.12",
+    "papaparse": "^5.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2",
+    "react-hot-toast": "^2.4.0",
     "react-router-dom": "^6.8.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "@types/papaparse": "^5.3.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",

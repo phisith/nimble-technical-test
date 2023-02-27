@@ -3,7 +3,7 @@ import SignIn from "../pages/signIn";
 import { ModalSignUpProvider } from "../components/modals/modalSignUp";
 import React from "react";
 import Home from "../pages/home";
-import Layout from "../components/layouts";
+import { Layout } from "../components/layouts";
 
 export const routers = createBrowserRouter([
   {
