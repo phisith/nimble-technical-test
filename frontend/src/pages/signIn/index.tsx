@@ -14,7 +14,7 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data: {}) => {
-    navigate("/homePage");
+    navigate("/app");
     console.log(data);
   };
 
@@ -37,7 +37,7 @@ const SignIn = () => {
             </h1>
             <p className={"mt-2 text-small text-gray-600"}>
               Create by{" "}
-              <span className={"text-violet-900"}> Phisith Lengsavath</span>
+              <span className={"text-primary"}> Phisith Lengsavath</span>
             </p>
           </div>
           <form

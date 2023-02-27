@@ -10,7 +10,7 @@ const InputWithLabel = (props: InputWithLabelProps) => {
         </label>
         <input
           type={props?.type ? props.type : "text"}
-          className={`mt-1 relative w-full border border-gray-300 rounded text-sm focus:z-10 focus:border-violet-900 focus:outline-none focus:ring-violet-900 ${
+          className={`mt-1 relative w-full border border-gray-300 rounded text-sm focus:z-10 focus:border-primary focus:outline-none focus:ring-primary ${
             props?.error && "border-red-600 ring-red-600"
           }`}
           {...props?.form}

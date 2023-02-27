@@ -3,6 +3,7 @@ import SignIn from "../pages/signIn";
 import { ModalSignUpProvider } from "../components/modals/modalSignUp";
 import React from "react";
 import Home from "../pages/home";
+import Layout from "../components/layouts";
 
 export const routers = createBrowserRouter([
   {
@@ -20,7 +21,12 @@ export const routers = createBrowserRouter([
     ],
   },
   {
-    path: "/homePage",
-    element: <Home />,
+    path: "/app",
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
+    children: [{ path: "/app/home", element: <Home /> }],
   },
 ]);

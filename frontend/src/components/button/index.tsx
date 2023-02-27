@@ -1,21 +1,29 @@
 import { ButtonProps } from "./type";
 
-const setColor = (color?: string) => {
+const setColor = (color?: string, isSelected?: boolean) => {
   switch (color) {
-    case "primary":
-      return "bg-violet-900 hover:bg-violet-700 text-white";
+    case "error":
+      return "bg-error hover:bg-error/80 text-white";
     case "clear":
       return "bg-transparent border border-gray-300 hover:border-gray-600 text-black";
+    case "onNav":
+      return `bg-primary hover:bg-primary/80 text-white ${
+        isSelected && "bg-secondary/40"
+      } hover:bg-secondary/80`;
     default:
-      return "bg-violet-900 hover:bg-violet-700 text-white";
+      return "bg-primary hover:bg-primary/80 text-white ";
   }
 };
 const Button = (props: ButtonProps) => {
   return (
     <>
       <button
+        key={props?.key}
         type={props?.type ? props.type : "button"}
-        className={`${setColor(props.color)} px-3 py-2 rounded text-sm`}
+        className={`${setColor(
+          props.color,
+          props?.isSelected
+        )} px-3 py-2 rounded text-sm`}
         onClick={(e) => (props?.type !== "submit" ? props.action(e) : null)}
       >
         {props.title}
