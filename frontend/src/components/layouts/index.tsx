@@ -6,8 +6,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <div className={"min-h-full"}>
         <Nav />
-        <header></header>
-        <main>{children}</main>
+        <main className={"py-6"}>{children}</main>
       </div>
     </>
   );

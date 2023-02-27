@@ -1,5 +1,4 @@
 export interface ButtonProps {
-  key?: string | number;
   title: string;
   color?: string;
   action?: any;

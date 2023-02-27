@@ -1,5 +1,6 @@
 import Button from "../button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const pages = [
   { title: "Home", path: "/app" },
@@ -9,6 +10,19 @@ const Nav = () => {
   const location = useLocation();
   const path = location.pathname;
   const navigation = useNavigate();
+  const [pageTitle, setPageTitle] = useState("");
+
+  useEffect(() => {
+    const currentPage = pages.filter((val) => {
+      return val.path === path;
+    });
+    setPageTitle(currentPage[0]["title"]);
+  }, []);
+
+  const handleNavigation = (path: string, title: string) => {
+    navigation(path);
+    setPageTitle(title);
+  };
 
   return (
     <>
@@ -31,7 +45,7 @@ const Nav = () => {
                   title={val?.title}
                   color={"onNav"}
                   isSelected={path === val.path && true}
-                  action={() => navigation(val.path)}
+                  action={() => handleNavigation(val.path, val.title)}
                 />
               );
             })}
@@ -44,6 +58,11 @@ const Nav = () => {
           </div>
         </div>
       </nav>
+      <header className={"bg-white shadow"}>
+        <div className={"w-full px-8 py-6"}>
+          <h1 className={"text-3xl font-bold tracking-tight"}>{pageTitle}</h1>
+        </div>
+      </header>
     </>
   );
 };

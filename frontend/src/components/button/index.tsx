@@ -18,7 +18,6 @@ const Button = (props: ButtonProps) => {
   return (
     <>
       <button
-        key={props?.key}
         type={props?.type ? props.type : "button"}
         className={`${setColor(
           props.color,
