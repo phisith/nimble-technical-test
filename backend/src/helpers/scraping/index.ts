@@ -6,10 +6,10 @@ import {formatKeyWord} from "../format";
 const getScrapingData = async (keyword: string) => {
     try {
         // const url = "https://www.google.com/search?q=life+insurance&hl=en&gl=th";
-        const url = `https://www.google.com/search?q=${formatKeyWord(keyword)}&hl=en`;
-        //
+        const url = `https://www.google.com/search?q=${formatKeyWord(keyword)}&hl=en`
+
         const response = await unirest
-            .get(url)
+            .get(encodeURI(url))
             .headers({
                 "User-Agent":
                     selectRandomUser()
