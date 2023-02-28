@@ -1,6 +1,8 @@
 import {Router} from "express"
+import {importCSV} from "../controllers";
 
 const router = Router()
+
 
 // get
 router.get("/", (req, res) => {
@@ -8,10 +10,7 @@ router.get("/", (req, res) => {
 });
 
 //post
-router.post("/import_csv", (req, res) => {
-    console.log(req.body.data)
-    res.send("Done")
-})
+router.post("/import_csv", importCSV)
 
 
 export {router}

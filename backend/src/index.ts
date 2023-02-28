@@ -1,6 +1,6 @@
 import express, {Express} from "express";
 import cors from "cors"
-import {router} from "./routes/index.js";
+import {router} from "./routes";
 
 const app: Express = express()
 const PORT = process.env.BACKEND_PORT

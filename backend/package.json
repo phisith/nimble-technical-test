@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "type": "module",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,7 +22,9 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "unirest": "^0.6.0"
   }
 }
