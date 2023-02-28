@@ -47,7 +47,7 @@ const getScrapingData = async (keyword: string) => {
         // result
         $(".LHJvCe > div").each((i, el) => {
             const rawResult = $(el).text().trim().split(/[' ]/)
-            result = rawResult[1].replace(',', '')
+            result = Number(rawResult[1].replace(/,/g, ''))
             result_time = rawResult[3].substring(1)
         })
 
@@ -55,11 +55,11 @@ const getScrapingData = async (keyword: string) => {
 
         return {
             keyword: keyword,
-            ad_words: ads.length,
-            total_link: allLink.length + +subLink.length + ads.length + subAds.length,
+            adWords: ads.length,
+            totalLink: allLink.length + +subLink.length + ads.length + subAds.length,
             result: result,
-            result_time: result_time,
-            html_code: htmlCode
+            resultTime: result_time,
+            htmlCode: htmlCode
         }
 
     } catch (e) {
