@@ -16,3 +16,17 @@ services:
       - ./.env
     volumes:
       - ./backend/:/backend/
+
+  database:
+    image: postgres:14.2-alpine
+    restart: always
+    volumes:
+      - ${DB_LOCATION}:/var/lib/postgresql/data/
+      - ${TMP_LOC}:/tmp_db
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+
