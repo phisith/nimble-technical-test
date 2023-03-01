@@ -8,12 +8,16 @@ import { useBlockUi } from "./useBlockUi";
 import { useResults } from "./useResults";
 
 export const useSendCSV = () => {
-  const { state } = useContext(LayoutContext);
+  const { state, dispatch } = useContext(LayoutContext);
   const { blockUiSwitcher } = useBlockUi();
   const { setResult } = useResults();
   let randomNum = randomNumber();
   let todayFull = getTodayFull();
   let insertCode = randomNum + todayFull;
+
+  const setInsertCode = (code: string) => {
+    dispatch({ type: "SET_INSERT_CODE", payload: code });
+  };
 
   const sendCSV = () => {
     blockUiSwitcher();
@@ -46,6 +50,7 @@ export const useSendCSV = () => {
               console.log(err);
             })
             .finally(() => {
+              setInsertCode(insertCode);
               blockUiSwitcher();
             });
         });

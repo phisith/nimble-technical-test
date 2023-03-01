@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useMemo, useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-table";
 import { ResultType } from "./type";
 import { LayoutContext } from "../../layouts";
+import Button from "../../button";
+import ColFilter from "../../controls/colFilter/Filter";
 const TableUltimate = () => {
   const { state } = useContext(LayoutContext);
   const columns = useMemo<ColumnDef<ResultType | {}>[]>(
@@ -27,6 +29,13 @@ const TableUltimate = () => {
     []
   );
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [filter, setFilter] = useState<ResultType | any | string>({
+    keyword: "",
+    adWords: "",
+    totalLink: "",
+    result: "",
+    resultTime: "",
+  });
 
   const onSorting = (e: any) => {
     setSorting(e);
@@ -41,10 +50,15 @@ const TableUltimate = () => {
     onSortingChange: onSorting,
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
+    manualFiltering: true,
   });
 
   return (
     <>
+      <div className={"flex justify-between items-center"}>
+        <p className={"text-md font-bold"}>Total: {state.data.length}</p>
+        <Button title={"Search"} />
+      </div>
       <div className={"bg-white shadow rounded overflow-auto"}>
         <table className={"text-left w-full h-full"}>
           <thead
@@ -59,26 +73,43 @@ const TableUltimate = () => {
                       key={header.id}
                       colSpan={header.colSpan}
                       scope={"col"}
-                      className={"px-6 py-3"}
+                      className={"px-6 py-3 whitespace-nowrap"}
                     >
                       {header.isPlaceholder ? null : (
-                        <div
-                          {...{
-                            className: header.column.getCanSort()
-                              ? "cursor-pointer select-none"
-                              : "",
-                            onClick: header.column.getToggleSortingHandler(),
-                          }}
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                          {{
-                            asc: " 🔼",
-                            desc: " 🔽",
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
+                        <>
+                          <div
+                            {...{
+                              className: header.column.getCanSort()
+                                ? "cursor-pointer select-none"
+                                : "",
+                              onClick: header.column.getToggleSortingHandler(),
+                            }}
+                          >
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                            {{
+                              asc: " 🔼",
+                              desc: " 🔽",
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>
+                          {header.column.getCanFilter() ? (
+                            <>
+                              <ColFilter
+                                value={filter[header.column.id]}
+                                onValueChange={(
+                                  e: ChangeEvent<HTMLInputElement>
+                                ) => {
+                                  setFilter({
+                                    ...filter,
+                                    [header.column.id]: e.target.value,
+                                  });
+                                }}
+                              />
+                            </>
+                          ) : null}
+                        </>
                       )}
                     </th>
                   );

@@ -1,7 +1,7 @@
 export type ResultType = {
   keyword: string;
-  adWords: number;
-  totalLink: number;
-  result: number;
-  resultTime: number;
+  adWords: number | string;
+  totalLink: number | string;
+  result: number | string;
+  resultTime: number | string;
 };

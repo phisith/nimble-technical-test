@@ -5,6 +5,7 @@ const initialState: LayoutState = {
   data: [{}],
   isLoading: false,
   results: [],
+  insertCode: "",
 };
 
 export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
@@ -17,6 +18,9 @@ export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
       return { ...state };
     case "SET_RESULT":
       state.results = action.payload.results;
+      return { ...state };
+    case "SET_INSERT_CODE":
+      state.insertCode = action.payload.insertCode;
       return { ...state };
     default:
       return state;

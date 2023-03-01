@@ -6,9 +6,10 @@ export interface LayoutState {
   data: [{}];
   isLoading: boolean;
   results: [];
+  insertCode: string;
 }
 
 export interface LayoutAction {
-  type: "SET" | "SET_LOADING" | "SET_RESULT";
+  type: "SET" | "SET_LOADING" | "SET_RESULT" | "SET_INSERT_CODE";
   payload: LayoutState;
 }
