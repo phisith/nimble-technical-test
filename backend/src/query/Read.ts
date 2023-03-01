@@ -1,9 +1,18 @@
-import {PrismaClient} from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export const searchKeywords = async (searchKey: {}) => {
-    return prisma.scrapingData.findMany({
-        where: searchKey
-    })
-}
+  return prisma.scrapingData.findMany({
+    where: searchKey,
+    select: {
+      id: true,
+      createdAt: true,
+      keyword: true,
+      adWords: true,
+      totalLink: true,
+      result: true,
+      resultTime: true,
+    },
+  });
+};

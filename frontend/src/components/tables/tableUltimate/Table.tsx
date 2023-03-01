@@ -10,8 +10,10 @@ import { ResultType } from "./type";
 import { LayoutContext } from "../../layouts";
 import Button from "../../button";
 import ColFilter from "../../controls/colFilter/Filter";
+import { useFetchKeywords } from "../../../hooks/useFetchKeywords";
 const TableUltimate = () => {
   const { state } = useContext(LayoutContext);
+  const { fetchKeywords } = useFetchKeywords();
   const columns = useMemo<ColumnDef<ResultType | {}>[]>(
     () => [
       { accessorKey: "keyword", header: "Keyword" },
@@ -53,11 +55,15 @@ const TableUltimate = () => {
     manualFiltering: true,
   });
 
+  const onFilterKeyword = () => {
+    fetchKeywords(filter);
+  };
+
   return (
     <>
       <div className={"flex justify-between items-center"}>
         <p className={"text-md font-bold"}>Total: {state.data.length}</p>
-        <Button title={"Search"} />
+        <Button title={"Search"} action={() => onFilterKeyword()} />
       </div>
       <div className={"bg-white shadow rounded overflow-auto"}>
         <table className={"text-left w-full h-full"}>

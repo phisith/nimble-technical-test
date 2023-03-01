@@ -16,7 +16,7 @@ export const useSendCSV = () => {
   let insertCode = randomNum + todayFull;
 
   const setInsertCode = (code: string) => {
-    dispatch({ type: "SET_INSERT_CODE", payload: code });
+    dispatch({ type: "SET_INSERT_CODE", payload: { insertCode: code } });
   };
 
   const sendCSV = () => {
