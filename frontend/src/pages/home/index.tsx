@@ -1,5 +1,6 @@
 import PreviewKeywords from "../../components/preview/previewKeywords/PreviewKeywords";
 import ImportCSV from "../../components/importCSV/ImportCSV";
+import ResultsView from "../../components/preview/resultsView/ResultsView";
 
 const Home = () => {
   return (
@@ -8,6 +9,9 @@ const Home = () => {
         <div className={"flex flex-col gap-2"}>
           <ImportCSV />
           <PreviewKeywords />
+        </div>
+        <div className={"col-span-2"}>
+          <ResultsView />
         </div>
       </div>
     </>
