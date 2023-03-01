@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {importCSV} from "../controllers";
+import {importCSV, getKeywords} from "../controllers";
 
 const router = Router()
 
@@ -8,6 +8,8 @@ const router = Router()
 router.get("/", (req, res) => {
     res.send("Hello from Express TS");
 });
+
+router.get("/searchKeywords", getKeywords)
 
 //post
 router.post("/import_csv", importCSV)

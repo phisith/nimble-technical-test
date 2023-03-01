@@ -2,13 +2,21 @@ import { LayoutAction, LayoutState } from "./type";
 import React, { createContext, useReducer } from "react";
 
 const initialState: LayoutState = {
-  data: [],
+  data: [{}],
+  isLoading: false,
+  results: [],
 };
 
 export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
   switch (action.type) {
     case "SET":
       state.data = action.payload.data;
+      return { ...state };
+    case "SET_LOADING":
+      state.isLoading = action.payload.isLoading;
+      return { ...state };
+    case "SET_RESULT":
+      state.results = action.payload.results;
       return { ...state };
     default:
       return state;
