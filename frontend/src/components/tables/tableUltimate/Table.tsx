@@ -1,9 +1,10 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  SortingState,
 } from "@tanstack/react-table";
 import { ResultType } from "./type";
 import { LayoutContext } from "../../layouts";
@@ -25,13 +26,23 @@ const TableUltimate = () => {
     ],
     []
   );
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const onSorting = (e: any) => {
+    setSorting(e);
+  };
 
   const table = useReactTable({
     data: state.results,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: onSorting,
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
   });
+
   return (
     <>
       <div className={"bg-white shadow rounded overflow-auto"}>
