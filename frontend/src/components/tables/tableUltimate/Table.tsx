@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -39,6 +39,11 @@ const TableUltimate = () => {
     resultTime: "",
   });
 
+  useEffect(() => {
+    console.log(state.data);
+    state.data.length > 0 && fetchKeywords(filter, sorting);
+  }, [sorting]);
+
   const onSorting = (e: any) => {
     setSorting(e);
   };
@@ -56,7 +61,7 @@ const TableUltimate = () => {
   });
 
   const onFilterKeyword = () => {
-    fetchKeywords(filter);
+    fetchKeywords(filter, sorting);
   };
 
   return (

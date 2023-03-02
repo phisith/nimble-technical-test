@@ -2,7 +2,7 @@ import { LayoutAction, LayoutState } from "./type";
 import React, { createContext, useReducer } from "react";
 
 const initialState: LayoutState = {
-  data: [{}],
+  data: [],
   isLoading: false,
   results: [],
   insertCode: "",

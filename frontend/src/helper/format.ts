@@ -1,3 +1,5 @@
+import { SortingState } from "@tanstack/react-table";
+
 export const removeEmptyObj = (obj: {} | any) => {
   const keys = Object.keys(obj);
   for (let i = 0; i < keys.length; ++i) {
@@ -8,4 +10,19 @@ export const removeEmptyObj = (obj: {} | any) => {
     }
   }
   return obj;
+};
+
+export const formatSorting = (sorting?: SortingState | undefined) => {
+  let result: any = {};
+  console.log(sorting);
+  if (sorting && sorting.length > 0) {
+    if (sorting[0].desc) {
+      result[sorting[0]["id"]] = "desc";
+    } else {
+      result[sorting[0]["id"]] = "asc";
+    }
+    return result;
+  } else {
+    return { id: "asc" };
+  }
 };

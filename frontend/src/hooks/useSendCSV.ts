@@ -6,6 +6,7 @@ import { randomNumber } from "../helper/randomNumber";
 import { getTodayFull } from "../helper/moment";
 import { useBlockUi } from "./useBlockUi";
 import { useResults } from "./useResults";
+import { formatSorting } from "../helper/format";
 
 export const useSendCSV = () => {
   const { state, dispatch } = useContext(LayoutContext);
@@ -37,9 +38,14 @@ export const useSendCSV = () => {
           return;
         })
         .finally(() => {
+          let config = {
+            searchKey: { insertCode: insertCode },
+            sortingBy: formatSorting(),
+          };
+
           axios
             .get("http://localhost:8000/searchKeywords", {
-              params: { insertCode: insertCode },
+              params: config,
             })
             .then((res) => {
               setResult(res.data);

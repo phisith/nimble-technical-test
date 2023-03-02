@@ -3,7 +3,7 @@ export interface LayoutProps {
 }
 
 export interface LayoutState {
-  data: [{}];
+  data: [];
   isLoading: boolean;
   results: [];
   insertCode: string;
