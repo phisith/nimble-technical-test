@@ -6,3 +6,7 @@ export type ResultType = {
   result: number | string;
   resultTime: number | string;
 };
+
+export interface TableUltimateProps {
+  fetchOnStart?: boolean;
+}

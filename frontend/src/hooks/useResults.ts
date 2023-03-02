@@ -10,6 +10,13 @@ export const useResults = () => {
     });
   };
 
+  const setTotalKeyword = (total: number) => {
+    layoutContext.dispatch({
+      type: "SET_TOTAL_KEYWORD",
+      payload: { totalKeyword: total },
+    });
+  };
+
   const resetAll = () => {
     layoutContext.dispatch({
       type: "RESET",
@@ -17,5 +24,5 @@ export const useResults = () => {
     });
   };
 
-  return { setResult, resetAll };
+  return { setResult, resetAll, setTotalKeyword };
 };

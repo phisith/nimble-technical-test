@@ -4,7 +4,7 @@ const History = () => {
   return (
     <>
       <div className={"mx-auto container w-full"}>
-        <ResultsView title={"History"} />
+        <ResultsView title={"History"} fetchOnStart={true} />
       </div>
     </>
   );

@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { importCSV, getKeywords, getKeywordFull } from "../controllers";
+import {
+  importCSV,
+  getKeywords,
+  getKeywordFull,
+  getTotalKeyword,
+} from "../controllers";
 
 const router = Router();
 
@@ -11,6 +16,8 @@ router.get("/", (req, res) => {
 router.get("/searchKeywords", getKeywords);
 
 router.get("/searchKeywordFull", getKeywordFull);
+
+router.get("/totalKeyword", getTotalKeyword);
 
 //post
 router.post("/import_csv", importCSV);

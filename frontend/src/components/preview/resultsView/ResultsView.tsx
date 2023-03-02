@@ -6,7 +6,7 @@ const ResultsView = (props: ResultViewProps) => {
     <>
       <div className={"flex flex-col gap-2 h-[75.5vh]"}>
         <label className={"text-xl font-bold"}>{props?.title}</label>
-        <TableUltimate />
+        <TableUltimate fetchOnStart={props.fetchOnStart} />
       </div>
     </>
   );

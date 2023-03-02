@@ -11,7 +11,7 @@ import { formatSorting } from "../helper/format";
 export const useSendCSV = () => {
   const { state, dispatch } = useContext(LayoutContext);
   const { blockUiSwitcher } = useBlockUi();
-  const { setResult } = useResults();
+  const { setResult, setTotalKeyword } = useResults();
   let randomNum = randomNumber();
   let todayFull = getTodayFull();
   let insertCode = randomNum + todayFull;
@@ -21,8 +21,8 @@ export const useSendCSV = () => {
   };
 
   const sendCSV = () => {
-    blockUiSwitcher();
     if (state.data && state.data.length > 0) {
+      blockUiSwitcher();
       axios
         .post("http://localhost:8000/import_csv", {
           data: state.data,
@@ -49,6 +49,7 @@ export const useSendCSV = () => {
             })
             .then((res) => {
               setResult(res.data);
+              setTotalKeyword(res.data.length);
             })
             .catch((err) => {
               toast.error("Something went wrong!");

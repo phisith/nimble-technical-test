@@ -18,6 +18,10 @@ export const parseCSVToJson = (
       skipEmptyLines: true,
       worker: true,
       complete(results) {
+        if (results.data.length > 100) {
+          toast.error("Keywords is more than 100");
+          return;
+        }
         setFunction(results.data);
       },
     });

@@ -11,11 +11,12 @@ import { useModalResult } from "./useModalResult";
 export const useFetchKeywords = () => {
   const { state } = useContext(LayoutContext);
   const { blockUiSwitcher } = useBlockUi();
-  const { setResult } = useResults();
+  const { setResult, setTotalKeyword } = useResults();
   const { setSelectedDataResult } = useModalResult();
 
   const fetchKeywords = (filter: {}, sorting?: SortingState) => {
     blockUiSwitcher();
+    setResult([]);
     let config = {
       searchKey: removeEmptyObj({ insertCode: state.insertCode, ...filter }),
       sortingBy: formatSorting(sorting),
@@ -33,7 +34,21 @@ export const useFetchKeywords = () => {
         console.log(err);
       })
       .finally(() => {
-        blockUiSwitcher();
+        axios
+          .get("http://localhost:8000/totalKeyword", {
+            params: config,
+          })
+          .then((res) => {
+            setTotalKeyword(res.data);
+          })
+          .catch((err) => {
+            toast.error("Something went wrong!");
+            blockUiSwitcher();
+            console.log(err);
+          })
+          .finally(() => {
+            blockUiSwitcher();
+          });
       });
   };
 
@@ -55,5 +70,35 @@ export const useFetchKeywords = () => {
         blockUiSwitcher();
       });
   };
-  return { fetchKeywords, fetchKeywordFull };
+
+  const fetchMoreKeywords = (
+    filter: {},
+    sorting?: SortingState,
+    skip?: number
+  ) => {
+    blockUiSwitcher();
+    let config = {
+      searchKey: removeEmptyObj({ insertCode: state.insertCode, ...filter }),
+      sortingBy: formatSorting(sorting),
+      skip: skip,
+    };
+    axios
+      .get("http://localhost:8000/searchKeywords", {
+        params: config,
+      })
+      .then((res) => {
+        let newResult = state.results.concat(res.data);
+        console.log(newResult);
+        setResult(newResult);
+      })
+      .catch((err) => {
+        toast.error("Something went wrong!");
+        blockUiSwitcher();
+        console.log(err);
+      })
+      .finally(() => {
+        blockUiSwitcher();
+      });
+  };
+  return { fetchKeywords, fetchKeywordFull, fetchMoreKeywords };
 };

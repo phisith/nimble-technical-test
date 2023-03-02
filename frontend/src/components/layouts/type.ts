@@ -3,13 +3,14 @@ export interface LayoutProps {
 }
 
 export interface LayoutState {
-  data: [];
+  data: [] | [{}];
   isLoading: boolean;
-  results: [];
+  results: any;
   insertCode: string;
   isOpenModalResult: boolean;
   selectedResultIdx: number | string;
   selectedDataResult: {} | any;
+  totalKeyword: number;
 }
 
 export interface LayoutAction {
@@ -21,6 +22,7 @@ export interface LayoutAction {
     | "RESET"
     | "SET_MODAL"
     | "SET_SELECTED_INDEX"
-    | "SET_SELECTED_RESULT";
+    | "SET_SELECTED_RESULT"
+    | "SET_TOTAL_KEYWORD";
   payload: LayoutState;
 }

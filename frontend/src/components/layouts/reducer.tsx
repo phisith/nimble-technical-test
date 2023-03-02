@@ -9,6 +9,7 @@ const initialState: LayoutState = {
   isOpenModalResult: false,
   selectedResultIdx: "",
   selectedDataResult: {},
+  totalKeyword: 0,
 };
 
 export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
@@ -41,6 +42,9 @@ export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
       return { ...state };
     case "SET_SELECTED_RESULT":
       state.selectedDataResult = action.payload.selectedDataResult;
+      return { ...state };
+    case "SET_TOTAL_KEYWORD":
+      state.totalKeyword = action.payload.totalKeyword;
       return { ...state };
     default:
       return state;

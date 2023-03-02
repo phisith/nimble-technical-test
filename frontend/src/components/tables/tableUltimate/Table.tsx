@@ -1,22 +1,33 @@
-import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   SortingState,
+  Row,
 } from "@tanstack/react-table";
-import { ResultType } from "./type";
+import { ResultType, TableUltimateProps } from "./type";
 import { LayoutContext } from "../../layouts";
 import Button from "../../button";
 import ColFilter from "../../controls/colFilter/Filter";
 import { useFetchKeywords } from "../../../hooks/useFetchKeywords";
 import ModalResult from "../../modals/modalResult/Modal";
 import { useModalResult } from "../../../hooks/useModalResult";
-const TableUltimate = () => {
+import { useVirtual } from "react-virtual";
+const TableUltimate = (props: TableUltimateProps) => {
+  const tableContainerRef = useRef<HTMLDivElement>(null);
   const { state } = useContext(LayoutContext);
   const { modalSwitcher, setSelectedIndex } = useModalResult();
-  const { fetchKeywords } = useFetchKeywords();
+  const { fetchKeywords, fetchMoreKeywords } = useFetchKeywords();
   const columns = useMemo<ColumnDef<ResultType | any>[]>(
     () => [
       { accessorKey: "keyword", header: "Keyword" },
@@ -41,9 +52,15 @@ const TableUltimate = () => {
     result: "",
     resultTime: "",
   });
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
-    state.data.length > 0 && fetchKeywords(filter, sorting);
+    setSkip(0);
+    if (!props.fetchOnStart) {
+      state.data.length > 0 && fetchKeywords(filter, sorting);
+    } else {
+      fetchKeywords(filter, sorting);
+    }
   }, [sorting]);
 
   const onSorting = (e: any) => {
@@ -62,17 +79,60 @@ const TableUltimate = () => {
     manualFiltering: true,
   });
 
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtual({
+    parentRef: tableContainerRef,
+    size: rows.length,
+    overscan: 10,
+  });
+  const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
+  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+  const paddingBottom =
+    virtualRows.length > 0
+      ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
+      : 0;
+
   const onFilterKeyword = () => {
+    setSkip(0);
     fetchKeywords(filter, sorting);
   };
+
+  const calFetchMorePage = () => {
+    let nextSkip = skip + 100;
+    fetchMoreKeywords(filter, sorting, nextSkip);
+    setSkip(nextSkip);
+  };
+
+  const fetchMorePage = useCallback(
+    (containerRefElement?: HTMLDivElement | null) => {
+      if (containerRefElement) {
+        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
+        // console.log(state.totalKeyword > state.results.length);
+        if (
+          scrollHeight - scrollTop - clientHeight < 300 &&
+          state.totalKeyword > state.results.length &&
+          !state.isLoading
+        ) {
+          console.log(state.totalKeyword > state.results.length);
+          calFetchMorePage();
+        }
+      }
+    },
+    [calFetchMorePage]
+  );
 
   return (
     <>
       <div className={"flex justify-between items-center"}>
-        <p className={"text-md font-bold"}>Total: {state.data.length}</p>
+        <p className={"text-md font-bold"}>Total: {state.totalKeyword}</p>
         <Button title={"Search"} action={() => onFilterKeyword()} />
       </div>
-      <div className={"bg-white shadow rounded overflow-auto"}>
+      <div
+        className={"bg-white shadow rounded overflow-auto"}
+        onScroll={(e) => fetchMorePage(e.target as HTMLDivElement)}
+        ref={tableContainerRef}
+      >
         <table className={"text-left w-full h-full"}>
           <thead
             className={"sticky top-0 uppercase bg-gray-100 text-sm font-bold"}
@@ -131,7 +191,13 @@ const TableUltimate = () => {
             ))}
           </thead>
           <tbody className={"text-gray-600 text-sm"}>
-            {table.getRowModel().rows.map((row) => {
+            {paddingTop > 0 && (
+              <tr>
+                <td style={{ height: `${paddingTop}px` }} />
+              </tr>
+            )}
+            {virtualRows.map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<ResultType>;
               return (
                 <tr
                   key={row.id}
@@ -160,6 +226,11 @@ const TableUltimate = () => {
                 </tr>
               );
             })}
+            {paddingBottom > 0 && (
+              <tr>
+                <td style={{ height: `${paddingBottom}px` }} />
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

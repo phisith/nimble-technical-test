@@ -1,10 +1,17 @@
 import { PrismaClient } from "@prisma/client";
+import { formatKeywordsSearch } from "../helpers/format";
 
 const prisma = new PrismaClient();
 
-export const searchKeywords = async (searchKey: {}, sortingBy: {}) => {
+export const searchKeywords = async (
+  searchKey: {},
+  sortingBy: {},
+  skip: number
+) => {
   return prisma.scrapingData.findMany({
-    where: searchKey,
+    take: 100,
+    skip: skip,
+    where: formatKeywordsSearch(searchKey),
     select: {
       id: true,
       createdAt: true,
@@ -15,6 +22,12 @@ export const searchKeywords = async (searchKey: {}, sortingBy: {}) => {
       resultTime: true,
     },
     orderBy: sortingBy,
+  });
+};
+
+export const countKeywords = (searchKey: {}) => {
+  return prisma.scrapingData.count({
+    where: formatKeywordsSearch(searchKey),
   });
 };
 
