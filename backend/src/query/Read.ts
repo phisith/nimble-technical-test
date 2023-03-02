@@ -17,3 +17,9 @@ export const searchKeywords = async (searchKey: {}, sortingBy: {}) => {
     orderBy: sortingBy,
   });
 };
+
+export const searchKeywordFull = async (idx: number) => {
+  return prisma.scrapingData.findUnique({
+    where: { id: idx },
+  });
+};

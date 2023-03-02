@@ -6,11 +6,13 @@ import { useResults } from "./useResults";
 import { useBlockUi } from "./useBlockUi";
 import { formatSorting, removeEmptyObj } from "../helper/format";
 import { SortingState } from "@tanstack/react-table";
+import { useModalResult } from "./useModalResult";
 
 export const useFetchKeywords = () => {
   const { state } = useContext(LayoutContext);
   const { blockUiSwitcher } = useBlockUi();
   const { setResult } = useResults();
+  const { setSelectedDataResult } = useModalResult();
 
   const fetchKeywords = (filter: {}, sorting?: SortingState) => {
     blockUiSwitcher();
@@ -34,5 +36,24 @@ export const useFetchKeywords = () => {
         blockUiSwitcher();
       });
   };
-  return { fetchKeywords };
+
+  const fetchKeywordFull = (idx: number | string | any) => {
+    blockUiSwitcher();
+    axios
+      .get("http://localhost:8000/searchKeywordFull", {
+        params: { idx: state.results[idx]["id"] },
+      })
+      .then((res) => {
+        setSelectedDataResult(res.data);
+      })
+      .catch((err) => {
+        toast.error("Something went wrong!");
+        blockUiSwitcher();
+        console.log(err);
+      })
+      .finally(() => {
+        blockUiSwitcher();
+      });
+  };
+  return { fetchKeywords, fetchKeywordFull };
 };

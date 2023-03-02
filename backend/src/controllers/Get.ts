@@ -1,5 +1,5 @@
 import { request, response } from "express";
-import { searchKeywords } from "../query/Read";
+import { searchKeywordFull, searchKeywords } from "../query/Read";
 
 const getKeywords = async (req: typeof request, res: typeof response) => {
   const searchKey = req.query.searchKey;
@@ -10,4 +10,11 @@ const getKeywords = async (req: typeof request, res: typeof response) => {
   res.send(results);
 };
 
-export { getKeywords };
+const getKeywordFull = async (req: typeof request, res: typeof response) => {
+  const idx = req.query.idx;
+  let results = await searchKeywordFull(Number(idx));
+  res.status(200);
+  res.send(results);
+};
+
+export { getKeywords, getKeywordFull };

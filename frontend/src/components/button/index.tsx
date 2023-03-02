@@ -22,7 +22,7 @@ const Button = (props: ButtonProps) => {
         className={`${setColor(
           props.color,
           props?.isSelected
-        )} px-3 py-2 rounded text-sm`}
+        )} items-center px-3 py-2 rounded text-sm`}
         onClick={(e) => (props?.type !== "submit" ? props.action(e) : null)}
       >
         {props.title}

@@ -6,6 +6,9 @@ const initialState: LayoutState = {
   isLoading: false,
   results: [],
   insertCode: "",
+  isOpenModalResult: false,
+  selectedResultIdx: "",
+  selectedDataResult: {},
 };
 
 export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
@@ -26,6 +29,18 @@ export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
       state.data = [];
       state.results = [];
       state.insertCode = "";
+      state.isOpenModalResult = false;
+      state.selectedResultIdx = "";
+      state.selectedDataResult = {};
+      return { ...state };
+    case "SET_MODAL":
+      state.isOpenModalResult = action.payload.isOpenModalResult;
+      return { ...state };
+    case "SET_SELECTED_INDEX":
+      state.selectedResultIdx = action.payload.selectedResultIdx;
+      return { ...state };
+    case "SET_SELECTED_RESULT":
+      state.selectedDataResult = action.payload.selectedDataResult;
       return { ...state };
     default:
       return state;

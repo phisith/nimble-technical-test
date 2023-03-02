@@ -1,4 +1,5 @@
 export type ResultType = {
+  id: string;
   keyword: string;
   adWords: number | string;
   totalLink: number | string;

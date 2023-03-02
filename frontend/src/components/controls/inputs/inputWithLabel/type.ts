@@ -3,4 +3,5 @@ export interface InputWithLabelProps {
   type?: string;
   form?: {} | undefined;
   error?: any | undefined;
+  disable?: boolean;
 }

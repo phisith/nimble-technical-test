@@ -13,6 +13,7 @@ const InputWithLabel = (props: InputWithLabelProps) => {
           className={`mt-1 relative w-full border border-gray-300 rounded text-sm focus:z-10 focus:border-primary focus:outline-none focus:ring-primary ${
             props?.error && "border-red-600 ring-red-600"
           }`}
+          disabled={props.disable}
           {...props?.form}
         />
         {props.error?.type === "required" && (

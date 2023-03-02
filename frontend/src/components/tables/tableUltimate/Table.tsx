@@ -11,10 +11,13 @@ import { LayoutContext } from "../../layouts";
 import Button from "../../button";
 import ColFilter from "../../controls/colFilter/Filter";
 import { useFetchKeywords } from "../../../hooks/useFetchKeywords";
+import ModalResult from "../../modals/modalResult/Modal";
+import { useModalResult } from "../../../hooks/useModalResult";
 const TableUltimate = () => {
   const { state } = useContext(LayoutContext);
+  const { modalSwitcher, setSelectedIndex } = useModalResult();
   const { fetchKeywords } = useFetchKeywords();
-  const columns = useMemo<ColumnDef<ResultType | {}>[]>(
+  const columns = useMemo<ColumnDef<ResultType | any>[]>(
     () => [
       { accessorKey: "keyword", header: "Keyword" },
       { accessorKey: "adWords", header: "Total AdWord" },
@@ -130,7 +133,14 @@ const TableUltimate = () => {
           <tbody className={"text-gray-600 text-sm"}>
             {table.getRowModel().rows.map((row) => {
               return (
-                <tr key={row.id} className={"border-b"}>
+                <tr
+                  key={row.id}
+                  className={"border-b cursor-pointer hover:bg-gray-50"}
+                  onClick={() => {
+                    setSelectedIndex(row.id);
+                    modalSwitcher();
+                  }}
+                >
                   <td className={"text-center px-6 py-4"}>
                     {Number(row.id) + 1}
                   </td>
@@ -153,6 +163,7 @@ const TableUltimate = () => {
           </tbody>
         </table>
       </div>
+      <ModalResult />
     </>
   );
 };
