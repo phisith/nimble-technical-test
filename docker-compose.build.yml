@@ -3,10 +3,10 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    command: npm run dev
+    command: npm install --force
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    command: npm run dev
+      dockerfile: frontend/Dockerfile
+    command: npm install
