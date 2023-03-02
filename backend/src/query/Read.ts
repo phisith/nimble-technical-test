@@ -8,37 +8,53 @@ export const searchKeywords = async (
   sortingBy: {},
   skip: number
 ) => {
-  return prisma.scrapingData.findMany({
-    take: 100,
-    skip: skip,
-    where: formatKeywordsSearch(searchKey),
-    select: {
-      id: true,
-      createdAt: true,
-      keyword: true,
-      adWords: true,
-      totalLink: true,
-      result: true,
-      resultTime: true,
-    },
-    orderBy: sortingBy,
-  });
+  try {
+    return prisma.scrapingData.findMany({
+      take: 100,
+      skip: skip,
+      where: formatKeywordsSearch(searchKey),
+      select: {
+        id: true,
+        createdAt: true,
+        keyword: true,
+        adWords: true,
+        totalLink: true,
+        result: true,
+        resultTime: true,
+      },
+      orderBy: sortingBy,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const countKeywords = (searchKey: {}) => {
-  return prisma.scrapingData.count({
-    where: formatKeywordsSearch(searchKey),
-  });
+  try {
+    return prisma.scrapingData.count({
+      where: formatKeywordsSearch(searchKey),
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const searchKeywordFull = async (idx: number) => {
-  return prisma.scrapingData.findUnique({
-    where: { id: idx },
-  });
+  try {
+    return prisma.scrapingData.findUnique({
+      where: { id: idx },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const findUser = async (userInfo: any) => {
-  return prisma.user.findUnique({
-    where: { userName: userInfo.userName },
-  });
+  try {
+    return prisma.user.findUnique({
+      where: { userName: userInfo.userName },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

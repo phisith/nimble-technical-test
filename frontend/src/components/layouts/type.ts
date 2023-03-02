@@ -5,7 +5,7 @@ export interface LayoutProps {
 export interface LayoutState {
   data: [] | [{}];
   isLoading: boolean;
-  results: any;
+  results: any | [];
   insertCode: string;
   isOpenModalResult: boolean;
   selectedResultIdx: number | string;

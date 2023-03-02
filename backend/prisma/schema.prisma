@@ -24,8 +24,8 @@ model ScrapingData {
 
 model User {
   id        String   @id @unique @default(uuid())
-  firstName String   @unique
-  lastName  String   @unique
+  firstName String
+  lastName  String
   userName  String   @unique
   password  String
   createdAt DateTime @default(now())

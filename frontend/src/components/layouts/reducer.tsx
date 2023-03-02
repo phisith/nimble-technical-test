@@ -33,6 +33,7 @@ export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
       state.isOpenModalResult = false;
       state.selectedResultIdx = "";
       state.selectedDataResult = {};
+      state.totalKeyword = 0;
       return { ...state };
     case "SET_MODAL":
       state.isOpenModalResult = action.payload.isOpenModalResult;

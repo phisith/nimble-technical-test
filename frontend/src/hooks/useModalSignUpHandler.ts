@@ -44,7 +44,7 @@ export const useModalSignUpHandler = () => {
         }
       )
       .then((res) => {
-        localStorage.setItem("key", res.data.key);
+        sessionStorage.setItem("key", res.data.key);
         navigate("/home");
         axios.defaults.headers.common["Authorization"] = res.data.key;
       })

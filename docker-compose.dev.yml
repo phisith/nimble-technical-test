@@ -6,7 +6,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.dev
 
+
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+    command: npm run dev

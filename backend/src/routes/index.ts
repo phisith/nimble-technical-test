@@ -18,15 +18,19 @@ router.get("/", (req, res) => {
 
 router.get("/searchKeywords", authenticateToken, getKeywords);
 
-router.get("/searchKeywordFull", getKeywordFull);
+router.get("/searchKeywordFull", authenticateToken, getKeywordFull);
 
-router.get("/totalKeyword", getTotalKeyword);
+router.get("/totalKeyword", authenticateToken, getTotalKeyword);
 
 router.get("/login", login);
 
-//post
-router.post("/import_csv", importCSV);
+router.get("/simple-verify", authenticateToken, (req, res) => {
+  res.send("Verified");
+});
 
-router.post("/createUser", createUser);
+//post
+router.post("/import_csv", authenticateToken, importCSV);
+
+router.post("/createUser", authenticateToken, createUser);
 
 export { router };

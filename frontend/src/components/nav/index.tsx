@@ -27,13 +27,18 @@ const Nav = () => {
     setPageTitle(title);
   };
 
+  const handleSignOut = () => {
+    sessionStorage.removeItem("key");
+    navigation("/");
+  };
+
   return (
     <>
       <nav className={"bg-primary"}>
         <div className={"flex w-full justify-between items-center px-8 py-4"}>
           <div className={"flex gap-2"}>
             <div className={"mr-4"}>
-              <a href={"/app"}>
+              <a href={"/home"}>
                 <img
                   alt={"nimble-icon"}
                   src={"./nimble-symbol.png"}
@@ -54,10 +59,12 @@ const Nav = () => {
             })}
           </div>
           <div className={"flex gap-2 items-center"}>
-            <div>
-              <p>Jojo</p>
-            </div>
-            <Button title={"Sign out"} color={"error"} />
+            <div></div>
+            <Button
+              title={"Sign out"}
+              color={"error"}
+              action={() => handleSignOut()}
+            />
           </div>
         </div>
       </nav>

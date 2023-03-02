@@ -31,7 +31,6 @@ const getTotalKeyword = async (req: typeof request, res: typeof response) => {
 };
 
 const login = async (req: typeof request, res: typeof response) => {
-  console.log(req.query);
   const userInfo: any = req.query.userInfo;
   let user = await findUser(userInfo);
   if (user) {

@@ -10,12 +10,15 @@ services:
       - ./frontend/:/frontend/
 
   backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     env_file:
       - ./.env
     volumes:
-      - ./backend/:/backend/
+      - ./backend/:/usr/src/backend
 
   database:
     image: postgres:14.2-alpine
