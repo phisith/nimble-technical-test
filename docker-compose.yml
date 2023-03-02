@@ -2,17 +2,34 @@ version: '3.8'
 
 services:
   frontend:
+    build: ./frontend
     ports:
       - "3000:3000"
     env_file:
       - ./.env
     volumes:
-      - ./frontend/:/frontend/
+      - ./frontend/:/usr/src/frontend
+
 
   backend:
-    ports:
-      - "8000:8000"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     env_file:
       - ./.env
     volumes:
-      - ./backend/:/backend/
+      - ./backend/:/usr/src/backend
+
+  database:
+    image: postgres:14.2-alpine
+    restart: always
+    volumes:
+      - ${DB_LOCATION}:/var/lib/postgresql/data/
+      - ${TMP_LOC}:/tmp_db
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+
