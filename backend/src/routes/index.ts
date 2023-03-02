@@ -31,6 +31,6 @@ router.get("/simple-verify", authenticateToken, (req, res) => {
 //post
 router.post("/import_csv", authenticateToken, importCSV);
 
-router.post("/createUser", authenticateToken, createUser);
+router.post("/createUser", createUser);
 
 export { router };

@@ -10,4 +10,9 @@ export default defineConfig({
     strictPort: true,
     port: 3000,
   },
+  preview: {
+    host: true,
+    strictPort: true,
+    port: 3000,
+  },
 });

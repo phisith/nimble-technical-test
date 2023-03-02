@@ -8,5 +8,8 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: frontend/Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
     command: npm install
+

@@ -3,10 +3,12 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    command: npm run dev
+    command: npm run build
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
     command: npm run dev
