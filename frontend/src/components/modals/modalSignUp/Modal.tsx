@@ -8,14 +8,16 @@ import { useForm } from "react-hook-form";
 
 const ModalSignUp = () => {
   const { state } = useContext(ModalSignUpContext);
-  const { modalSignUpSwitcher } = useModalSignUpHandler();
+  const { modalSignUpSwitcher, createUser } = useModalSignUpHandler();
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
-  const onSubmit = (data: {}) => console.log(data);
+  const onSubmit = (data: {}) => {
+    createUser(data).then(() => reset());
+  };
 
   return (
     <Transition.Root show={state.isOpen} as={Fragment}>
@@ -75,7 +77,7 @@ const ModalSignUp = () => {
                   />
                   <InputWithLabel
                     title={"Username"}
-                    form={{ ...register("username", { required: true }) }}
+                    form={{ ...register("userName", { required: true }) }}
                     error={errors.username}
                   />
                   <InputWithLabel

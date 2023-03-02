@@ -26,5 +26,5 @@ app.use(cors(corsOptions));
 app.use("/", router);
 
 app.listen(PORT, () => {
-  console.log(`now Listening on port ${PORT}`);
+  console.log(`now Listening  on port ${PORT}`);
 });

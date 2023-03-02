@@ -36,3 +36,9 @@ export const searchKeywordFull = async (idx: number) => {
     where: { id: idx },
   });
 };
+
+export const findUser = async (userInfo: any) => {
+  return prisma.user.findUnique({
+    where: { userName: userInfo.userName },
+  });
+};

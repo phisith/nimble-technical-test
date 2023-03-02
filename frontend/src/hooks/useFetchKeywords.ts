@@ -23,6 +23,7 @@ export const useFetchKeywords = () => {
     };
     axios
       .get("http://localhost:8000/searchKeywords", {
+        timeout: 600000,
         params: config,
       })
       .then((res) => {

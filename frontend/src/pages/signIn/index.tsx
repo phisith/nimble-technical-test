@@ -3,19 +3,16 @@ import { useModalSignUpHandler } from "../../hooks/useModalSignUpHandler";
 import { ModalSignUp } from "../../components/modals/modalSignUp";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const { modalSignUpSwitcher } = useModalSignUpHandler();
-  const navigate = useNavigate();
+  const { modalSignUpSwitcher, login } = useModalSignUpHandler();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data: {}) => {
-    navigate("/app");
-    console.log(data);
+    login(data);
   };
 
   return (
@@ -52,7 +49,7 @@ const SignIn = () => {
                     errors?.username && "border-red-600 ring-red-600"
                   }`}
                   placeholder={"Username"}
-                  {...register("username", { required: true })}
+                  {...register("userName", { required: true })}
                 />
                 <input
                   type={"password"}

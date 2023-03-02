@@ -2,7 +2,15 @@ import { LayoutProps } from "./type";
 import { LayoutProvider, LayoutContext } from "./reducer";
 import Nav from "../nav";
 import { BlockUI } from "../blockUi";
+import { useEffect } from "react";
+import axios from "axios";
 const Layout = ({ children }: LayoutProps) => {
+  useEffect(() => {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("key")}`;
+  }, []);
+
   return (
     <LayoutProvider>
       <BlockUI />

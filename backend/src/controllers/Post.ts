@@ -1,6 +1,6 @@
 import { request, response } from "express";
 import { getScrapingData } from "../helpers/scraping";
-import { InsertKeywordResultBulk } from "../query";
+import { InsertKeywordResultBulk, InsertNewUser } from "../query";
 
 const importCSV = async (req: typeof request, res: typeof response) => {
   const keywords = req.body.data;
@@ -17,4 +17,11 @@ const importCSV = async (req: typeof request, res: typeof response) => {
   res.send({ data: results });
 };
 
-export { importCSV };
+const createUser = async (req: typeof request, res: typeof response) => {
+  const userInfo = req.body.userInfo;
+  let results = await InsertNewUser(userInfo);
+  res.status(201);
+  res.send({ data: results });
+};
+
+export { importCSV, createUser };
