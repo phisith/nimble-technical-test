@@ -1,15 +1,17 @@
 import Button from "../button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useResults } from "../../hooks/useResults";
 
 const pages = [
-  { title: "Home", path: "/app" },
-  { title: "History", path: "/app/history" },
+  { title: "Home", path: "/home" },
+  { title: "History", path: "/history" },
 ];
 const Nav = () => {
   const location = useLocation();
   const path = location.pathname;
   const navigation = useNavigate();
+  const { resetAll } = useResults();
   const [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const Nav = () => {
   }, []);
 
   const handleNavigation = (path: string, title: string) => {
+    resetAll();
     navigation(path);
     setPageTitle(title);
   };

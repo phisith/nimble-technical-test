@@ -22,6 +22,11 @@ export const LayoutReducer = (state: LayoutState, action: LayoutAction) => {
     case "SET_INSERT_CODE":
       state.insertCode = action.payload.insertCode;
       return { ...state };
+    case "RESET":
+      state.data = [];
+      state.results = [];
+      state.insertCode = "";
+      return { ...state };
     default:
       return state;
   }

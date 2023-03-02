@@ -11,7 +11,7 @@ const Home = () => {
           <PreviewKeywords />
         </div>
         <div className={"col-span-2"}>
-          <ResultsView />
+          <ResultsView title={"Review"} />
         </div>
       </div>
     </>

@@ -14,7 +14,6 @@ export const removeEmptyObj = (obj: {} | any) => {
 
 export const formatSorting = (sorting?: SortingState | undefined) => {
   let result: any = {};
-  console.log(sorting);
   if (sorting && sorting.length > 0) {
     if (sorting[0].desc) {
       result[sorting[0]["id"]] = "desc";

@@ -10,5 +10,12 @@ export const useResults = () => {
     });
   };
 
-  return { setResult };
+  const resetAll = () => {
+    layoutContext.dispatch({
+      type: "RESET",
+      payload: {},
+    });
+  };
+
+  return { setResult, resetAll };
 };

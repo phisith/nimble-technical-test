@@ -40,7 +40,6 @@ const TableUltimate = () => {
   });
 
   useEffect(() => {
-    console.log(state.data);
     state.data.length > 0 && fetchKeywords(filter, sorting);
   }, [sorting]);
 

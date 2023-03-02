@@ -10,6 +10,6 @@ export interface LayoutState {
 }
 
 export interface LayoutAction {
-  type: "SET" | "SET_LOADING" | "SET_RESULT" | "SET_INSERT_CODE";
+  type: "SET" | "SET_LOADING" | "SET_RESULT" | "SET_INSERT_CODE" | "RESET";
   payload: LayoutState;
 }
