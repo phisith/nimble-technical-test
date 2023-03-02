@@ -18,6 +18,7 @@ const Button = (props: ButtonProps) => {
   return (
     <>
       <button
+        title={props.title}
         type={props?.type ? props.type : "button"}
         className={`${setColor(
           props.color,
