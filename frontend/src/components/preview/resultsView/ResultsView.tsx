@@ -10,9 +10,7 @@ const ResultsView = (props: ResultViewProps) => {
       <div className={"flex flex-col gap-2 h-[75.5vh]"}>
         <label className={"text-xl font-bold"}>{props?.title}</label>
         {props?.title === "Review" ? (
-          state.results.length > 0 && (
-            <TableUltimate fetchOnStart={props.fetchOnStart} />
-          )
+          state.results.length > 0 && <TableUltimate />
         ) : (
           <TableUltimate fetchOnStart={props.fetchOnStart} />
         )}

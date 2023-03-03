@@ -16,7 +16,7 @@ export const useFetchKeywords = () => {
 
   const fetchKeywords = (filter: {}, sorting?: SortingState) => {
     blockUiSwitcher();
-    setResult([]);
+    // setResult([]);
     let config = {
       searchKey: removeEmptyObj({ insertCode: state.insertCode, ...filter }),
       sortingBy: formatSorting(sorting),
@@ -89,7 +89,6 @@ export const useFetchKeywords = () => {
       })
       .then((res) => {
         let newResult = state.results.concat(res.data);
-        console.log(newResult);
         setResult(newResult);
       })
       .catch((err) => {
