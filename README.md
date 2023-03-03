@@ -9,7 +9,7 @@ Let's start with How to run this project:
 docker-compose -f docker-compose.yml -f docker-compose.build.yml up & build
 ```
 unit you see this ( the 2 lines that got hightlisted ):
-![Screenshot 2566-03-03 at 10.19.14.png](..%2F..%2FDesktop%2FScreenshot%202566-03-03%20at%2010.19.14.png)
+![complete install.png](image%2Fcomplete%20install.png)
 
 then you need to exit the terminal.
 
@@ -21,7 +21,7 @@ cd backend
 npm run build
 ```
 
-3. Run (there 2 options, I recommend to go with Production Mode)
+3. Run (there are 2 options, I recommend to go with Production Mode)
 
 Production Mode
 ```
