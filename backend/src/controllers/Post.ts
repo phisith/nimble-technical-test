@@ -14,12 +14,10 @@ const importCSV = async (req: typeof request, res: typeof response) => {
       resultScraping.push(result);
     }
     let results = await InsertKeywordResultBulk(resultScraping);
-    res.status(201);
-    res.send({ data: results });
+    res.status(201).json({ data: results });
   } catch (err) {
     console.log(err);
-    res.status(500);
-    res.send({ data: [] });
+    res.status(500).json({ data: [] });
   }
 };
 
@@ -27,11 +25,9 @@ const createUser = async (req: typeof request, res: typeof response) => {
   const userInfo = req.body.userInfo;
   let results = await InsertNewUser(userInfo);
   if (results === "") {
-    res.status(404);
-    res.send({ msg: "user already exits" });
+    res.status(404).json({ msg: "user already exits" });
   } else {
-    res.status(201);
-    res.send({ data: results });
+    res.status(201).json({ data: results });
   }
 };
 

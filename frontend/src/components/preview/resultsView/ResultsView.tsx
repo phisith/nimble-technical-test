@@ -12,7 +12,7 @@ const ResultsView = (props: ResultViewProps) => {
         {props?.title === "Review" ? (
           state.results.length > 0 && <TableUltimate />
         ) : (
-          <TableUltimate fetchOnStart={props.fetchOnStart} />
+          <TableUltimate />
         )}
       </div>
     </>
