@@ -23,7 +23,7 @@ import { useFetchKeywords } from "../../../hooks/useFetchKeywords";
 import ModalResult from "../../modals/modalResult/Modal";
 import { useModalResult } from "../../../hooks/useModalResult";
 import { useVirtual } from "react-virtual";
-const TableUltimate = (props: TableUltimateProps) => {
+const TableUltimate = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const { state } = useContext(LayoutContext);
   const { modalSwitcher, setSelectedIndex } = useModalResult();
@@ -54,13 +54,18 @@ const TableUltimate = (props: TableUltimateProps) => {
   });
   const [skip, setSkip] = useState(0);
 
+  // useEffect(() => {
+  //   setSkip(0);
+  //   if (!props.fetchOnStart) {
+  //     state.data.length > 0 && fetchKeywords(filter, sorting);
+  //   } else {
+  //     fetchKeywords(filter, sorting);
+  //   }
+  //   countRef.current++;
+  // }, [sorting]);
+
   useEffect(() => {
-    setSkip(0);
-    if (!props.fetchOnStart) {
-      state.data.length > 0 && fetchKeywords(filter, sorting);
-    } else {
-      fetchKeywords(filter, sorting);
-    }
+    onFilterKeyword();
   }, [sorting]);
 
   const onSorting = (e: any) => {

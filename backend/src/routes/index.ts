@@ -25,7 +25,7 @@ router.get("/totalKeyword", authenticateToken, getTotalKeyword);
 router.get("/login", login);
 
 router.get("/simple-verify", authenticateToken, (req, res) => {
-  res.send("Verified");
+  res.status(200).json("Verified");
 });
 
 //post

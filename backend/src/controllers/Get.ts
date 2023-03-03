@@ -13,15 +13,13 @@ const getKeywords = async (req: typeof request, res: typeof response) => {
   const skip = req.query.skip;
   // console.log(req.query.searchKey);
   let results = await searchKeywords(searchKey, sortingBy, Number(skip) | 0);
-  res.status(200);
-  res.send(results);
+  res.status(200).json(results);
 };
 
 const getKeywordFull = async (req: typeof request, res: typeof response) => {
   const idx = req.query.idx;
   let results = await searchKeywordFull(Number(idx));
-  res.status(200);
-  res.send(results);
+  res.status(200).json(results);
 };
 
 const getTotalKeyword = async (req: typeof request, res: typeof response) => {
@@ -36,15 +34,12 @@ const login = async (req: typeof request, res: typeof response) => {
   if (user) {
     if (user.password === userInfo.password) {
       const token = generateAccessToken({ username: req.body.username });
-      res.status(200);
-      res.send({ key: token });
+      res.status(200).json({ key: token });
     } else {
-      res.status(404);
-      res.send({ msg: "Wrong password" });
+      res.status(404).json({ msg: "Wrong password" });
     }
   } else {
-    res.send(404);
-    res.send({ msg: "User's not found" });
+    res.status(404).json({ msg: "User's not found" });
   }
 };
 
