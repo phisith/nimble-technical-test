@@ -42,7 +42,7 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 docker exec -it nimble-technical-test-backend-1 /bin/sh
 npx prisma migrate dev --name init
 ```
-### After the process finish, exit the terminal then you good to go!
+After the process finish, exit the terminal then you good to go!
 
 ## How to use
 
@@ -150,6 +150,15 @@ But this time I decide to go with Testing-library, due to it simple, lightweight
 
 ### For the second I try to test on button click:
 ![btn click.png](image%2Fbtn%20click.png)
+
+After I have done with these 2 testing, I got a feeling that testing is similar to web scraping because you have to select the element in the page and do something with.
+
+However, making this project is quit challenging for me, at the end I was fun on learning new stuff and hope I have an opportunity to learn new things with Nimble again.
+
+Finally, If you have any questions or bugs feel free to open the issues, I will try to repose to it asap.
+
+### Thank you!!.
+Phisith Lengsavath
 
 
 
