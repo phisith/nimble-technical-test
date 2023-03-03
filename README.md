@@ -117,10 +117,10 @@ Below here I will list and reason of use it:
 4. react-router-dom
    - the new version react-router-dom v6 is come with simple way to handle routing in react app.
 5. Tanstack react table / react virtual
-6. - this library is an amazing library that help us a lot when we're working on sorting, search or pagination function for both client side and server side.
-7. axios
+   - this library is an amazing library that help us a lot when we're working on sorting, search or pagination function for both client side and server side.
+6. axios
    - simple CRUD library.
-8. papaparse
+7. papaparse
    - this library is help us to parse csv to json in simple way.
 
 ### Backend:
