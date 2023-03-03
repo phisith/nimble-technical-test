@@ -65,7 +65,7 @@ Fill in your information and click sign up to register, after that just sign up 
 ![homepage.png](image%2Fhomepage.png)
 
 * In this page you can upload your csv file that include 1 - 100 keywords, you can click on "choose file" and select your csv file to upload.
-    - your csv must have "keyword" as the column name. you can look or use at long_csv.csv or short_csv.csv both are in csv folder at the root of the project file.
+    - your csv must have "keyword" as the column name. you can look at or use "long_csv.csv" or "short_csv.csv" both are in csv folder at the root of the project file.
 * under the "upload" button you can preview your csv file there.
 * After that click on "upload" to send data to the backend and start the scraping this process may take about 4-5 minutes (If the process take longer than 4-5 minutes you should refresh the page and upload, the detail of this issues I will explain again below).
 
