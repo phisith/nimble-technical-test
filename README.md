@@ -69,7 +69,7 @@ https://user-images.githubusercontent.com/59072804/223541302-6e7cc09f-aff2-4e2f-
 
 ### and also you can click on the list to see the full result:
 
-![full result.png](image%2Ffull%20result.png)
+![full resul new.png](image%2Ffull%20resul%20new.png)
 
 4. This is history page:
 
