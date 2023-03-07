@@ -2,6 +2,15 @@ import { PrismaClient } from "@prisma/client";
 import { formatKeywordsSearch } from "../helpers/format";
 
 const prisma = new PrismaClient();
+export const InsertKeywordResultBulk = async (keywords: any[]) => {
+  try {
+    return prisma.scrapingData.createMany({
+      data: keywords,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const searchKeywords = async (
   searchKey: {},
@@ -43,16 +52,6 @@ export const searchKeywordFull = async (idx: number) => {
   try {
     return prisma.scrapingData.findUnique({
       where: { id: idx },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const findUser = async (userInfo: any) => {
-  try {
-    return prisma.user.findUnique({
-      where: { userName: userInfo.userName },
     });
   } catch (err) {
     console.log(err);

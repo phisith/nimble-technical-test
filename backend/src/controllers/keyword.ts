@@ -1,12 +1,30 @@
 import { request, response } from "express";
+import { getScrapingData } from "../helpers/scraping";
 import {
+  InsertKeywordResultBulk,
   countKeywords,
-  findUser,
   searchKeywordFull,
   searchKeywords,
-} from "../query/Read";
-import { generateAccessToken } from "../utils/jwt";
+} from "../query";
 
+const importCSV = async (req: typeof request, res: typeof response) => {
+  const keywords = req.body.data;
+  const insertCode = req.body.insertCode;
+  const resultScraping = [];
+  try {
+    for (let keyword of keywords) {
+      let word: string = Object.values(keyword)[0].toString();
+      let result = await getScrapingData(word);
+      result["insertCode"] = insertCode;
+      resultScraping.push(result);
+    }
+    let results = await InsertKeywordResultBulk(resultScraping);
+    res.status(201).json({ data: results });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ data: [] });
+  }
+};
 const getKeywords = async (req: typeof request, res: typeof response) => {
   const searchKey = req.query.searchKey;
   const sortingBy = req.query.sortingBy;
@@ -28,19 +46,4 @@ const getTotalKeyword = async (req: typeof request, res: typeof response) => {
   res.status(200).json(results);
 };
 
-const login = async (req: typeof request, res: typeof response) => {
-  const userInfo: any = req.query.userInfo;
-  let user = await findUser(userInfo);
-  if (user) {
-    if (user.password === userInfo.password) {
-      const token = generateAccessToken({ username: req.body.username });
-      res.status(200).json({ key: token });
-    } else {
-      res.status(404).json({ msg: "Wrong password" });
-    }
-  } else {
-    res.status(404).json({ msg: "User's not found" });
-  }
-};
-
-export { getKeywords, getKeywordFull, getTotalKeyword, login };
+export { getKeywords, getKeywordFull, getTotalKeyword, importCSV };
