@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ModalSignUpContext } from "../components/modals/modalSignUp";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import request from "../lil/request";
 
 export const useModalSignUpHandler = () => {
   const modalSignUpContext = useContext(ModalSignUpContext);
@@ -17,7 +17,7 @@ export const useModalSignUpHandler = () => {
   const createUser = async (userInfo: any) => {
     toast
       .promise(
-        axios.post("http://localhost:8000/createUser", {
+        request.post("http://localhost:8000/createUser", {
           userInfo,
         }),
         {
@@ -34,7 +34,7 @@ export const useModalSignUpHandler = () => {
   const login = (userInfo: any) => {
     toast
       .promise(
-        axios.get("http://localhost:8000/login", {
+        request.get("http://localhost:8000/login", {
           params: { userInfo: userInfo },
         }),
         {
@@ -45,8 +45,10 @@ export const useModalSignUpHandler = () => {
       )
       .then((res) => {
         sessionStorage.setItem("key", res.data.key);
+        request.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${sessionStorage.getItem("key")}`;
         navigate("/home");
-        axios.defaults.headers.common["Authorization"] = res.data.key;
       })
       .catch((err) => {
         console.log(err);
