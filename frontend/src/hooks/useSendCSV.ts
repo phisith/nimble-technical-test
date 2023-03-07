@@ -77,7 +77,6 @@ export const useSendCSV = () => {
         console.log(res);
       })
       .catch((err) => {
-        myToast("error");
         console.log(err);
       })
       .finally(async () => {
@@ -91,6 +90,14 @@ export const useSendCSV = () => {
               console.log(res);
               setResult(res.data);
               setTotalKeyword(res.data.length);
+              let countS = res.data
+                ? res.data.filter((element: any) => {
+                    return element.status === "s";
+                  })
+                : 0;
+              if (countS.length >= res.data.length) {
+                errorCheck = true;
+              }
             })
             .catch((err) => {
               errorCheck = true;
@@ -98,7 +105,8 @@ export const useSendCSV = () => {
               console.log(err);
             });
           if (errorCheck) {
-            myToast("error");
+            console.log("stop");
+            // myToast("error");
             break;
           }
         }

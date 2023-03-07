@@ -61,7 +61,7 @@ Fill in your information and click sign up to register, after that just sign up 
 
 ### this is after the upload and scraping data complete on the right of the screen you can see the results over there:
 
-[long polling.mov](image%2Flong%20polling.mov)
+
 
 ### at the column name you click on it to sorting the column, and also you can search for the keyword:
 

@@ -86,9 +86,10 @@ const getTotalKeyword = async (req: typeof request, res: typeof response) => {
 };
 
 const scrapingJob = async (req: typeof request, res: typeof response) => {
+  const insertCode = req.body.insertCode;
   const skip = req.query.skip;
   let keywordInDb: any = await searchKeywords(
-    { status: "p" },
+    { status: "p", insertCode: insertCode },
     {},
     Number(skip) | 0
   );
@@ -96,17 +97,25 @@ const scrapingJob = async (req: typeof request, res: typeof response) => {
   try {
     for (let keyword of keywordInDb) {
       let word = keyword.keyword;
-      queue.add({
-        keyword: word,
-        id: keyword.id,
-      });
+      queue
+        .add({
+          keyword: word,
+          id: keyword.id,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    queue.process(async (job, done) => {
-      job.progress("progress");
-      await getScrapingData(job.data.keyword, job.data.id);
-      done();
-    });
+    queue
+      .process(async (job, done) => {
+        job.progress("progress");
+        await getScrapingData(job.data.keyword, job.data.id);
+        done();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     res.status(200).json(keywordInDb);
   } catch (err) {
     console.log(err);
