@@ -61,7 +61,7 @@ Fill in your information and click sign up to register, after that just sign up 
 
 ### this is after the upload and scraping data complete on the right of the screen you can see the results over there:
 
-
+https://user-images.githubusercontent.com/59072804/223541302-6e7cc09f-aff2-4e2f-8d3f-32c660b2d522.mp4
 
 ### at the column name you click on it to sorting the column, and also you can search for the keyword:
 
