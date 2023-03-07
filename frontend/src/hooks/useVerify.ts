@@ -1,6 +1,6 @@
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import request from "../lil/request";
+import myToast from "../lil/toast";
 
 export const useVerify = () => {
   const navigation = useNavigate();
@@ -13,7 +13,7 @@ export const useVerify = () => {
       .then((res) => console.log(res))
       .catch((err) => {
         console.log(err);
-        toast.error("Please login again");
+        myToast("custom_error", "Please login again");
         navigation("/");
       });
   };

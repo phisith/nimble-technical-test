@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { useContext } from "react";
 import { LayoutContext } from "../components/layouts";
 import { useResults } from "./useResults";
@@ -7,6 +6,7 @@ import { formatSorting, removeEmptyObj } from "../helper/format";
 import { SortingState } from "@tanstack/react-table";
 import { useModalResult } from "./useModalResult";
 import request from "../lil/request";
+import myToast from "../lil/toast";
 
 export const useFetchKeywords = () => {
   const { state } = useContext(LayoutContext);
@@ -30,7 +30,7 @@ export const useFetchKeywords = () => {
         setResult(res.data);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })
@@ -43,7 +43,7 @@ export const useFetchKeywords = () => {
             setTotalKeyword(res.data);
           })
           .catch((err) => {
-            toast.error("Something went wrong!");
+            myToast("error");
             blockUiSwitcher();
             console.log(err);
           })
@@ -63,7 +63,7 @@ export const useFetchKeywords = () => {
         setSelectedDataResult(res.data);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })
@@ -92,7 +92,7 @@ export const useFetchKeywords = () => {
         setResult(newResult);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })
