@@ -4,45 +4,34 @@ Let's start with How to run this project:
 
 ## Setup
 
-### 1. Run this command and wait the installation complete:
+### 1. Run this command (for the first time):
 ```
-docker-compose -f docker-compose.yml -f docker-compose.build.yml up & build
+make build
 ```
-unit you see this ( the 2 lines that got hightlisted ):
+wait the process to be complete.
 
-![complete install.png](image%2Fcomplete%20install.png)
-
-then you need to exit the terminal.
-
-### 2. Run this command:
-
-go to backend folder and run "npm run dev"
-```
-cd backend
-npm run build
-```
-
-### 3. Run (there are 2 options, I recommend to go with Production Mode)
+### 2. Run (there are 2 options, I recommend to go with Production Mode)
 
 ### Production Mode
 ```
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+make start-prod
+```
+to stop
+```
+make down-prod
 ```
 
-Dev mode
+### Dev mode
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+make start-dev
+```
+to stop
+```
+make down-dev
 ```
 
-4. Run this command to migrate database:
-
-### Go in to backend image
-```
-docker exec -it nimble-technical-test-backend-1 /bin/sh
-npx prisma migrate dev --name init
-```
-After the process finish, exit the terminal then you good to go!
+After the process finish, then you good to go!
 
 ## How to use
 
