@@ -5,6 +5,7 @@ import Button from "../../button";
 import { LayoutContext } from "../../layouts";
 import { useModalResult } from "../../../hooks/useModalResult";
 import { useFetchKeywords } from "../../../hooks/useFetchKeywords";
+import { formatSafeHtml } from "../../../helper/format";
 
 const ModalResult = () => {
   const { modalSwitcher, resultRotation } = useModalResult();
@@ -50,7 +51,7 @@ const ModalResult = () => {
             leaveTo="opacity-0 scale-95"
           >
             <Dialog.Panel
-              className={"relative w-full max-w-md rounded bg-white"}
+              className={"relative w-full max-w-4xl rounded bg-white"}
             >
               <div className={"flex flex-col gap-2 p-6 pb-0"}>
                 <Dialog.Title className={"text-xl font-bold"}>
@@ -102,9 +103,15 @@ const ModalResult = () => {
                         "h-[30vh] mt-1 overflow-auto border rounded shadow"
                       }
                     >
-                      <p className={"p-3"}>
-                        {state.selectedDataResult?.htmlCode}
-                      </p>
+                      <div className={"p-3 relative"}>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: formatSafeHtml(
+                              state.selectedDataResult?.htmlCode
+                            ),
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 import { SortingState } from "@tanstack/react-table";
+import DOMPurify from "dompurify";
 
 export const removeEmptyObj = (obj: {} | any) => {
   const keys = Object.keys(obj);
@@ -24,4 +25,11 @@ export const formatSorting = (sorting?: SortingState | undefined) => {
   } else {
     return { id: "asc" };
   }
+};
+
+// clean html before render to prevent xss attack
+export const formatSafeHtml = (htmlCode: string) => {
+  return DOMPurify.sanitize(htmlCode, {
+    FORCE_BODY: true,
+  });
 };
