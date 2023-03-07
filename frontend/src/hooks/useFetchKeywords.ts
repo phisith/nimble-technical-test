@@ -1,5 +1,3 @@
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useContext } from "react";
 import { LayoutContext } from "../components/layouts";
 import { useResults } from "./useResults";
@@ -7,6 +5,8 @@ import { useBlockUi } from "./useBlockUi";
 import { formatSorting, removeEmptyObj } from "../helper/format";
 import { SortingState } from "@tanstack/react-table";
 import { useModalResult } from "./useModalResult";
+import request from "../lil/request";
+import myToast from "../lil/toast";
 
 export const useFetchKeywords = () => {
   const { state } = useContext(LayoutContext);
@@ -21,7 +21,7 @@ export const useFetchKeywords = () => {
       searchKey: removeEmptyObj({ insertCode: state.insertCode, ...filter }),
       sortingBy: formatSorting(sorting),
     };
-    axios
+    request
       .get("http://localhost:8000/searchKeywords", {
         timeout: 600000,
         params: config,
@@ -30,12 +30,12 @@ export const useFetchKeywords = () => {
         setResult(res.data);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })
       .finally(() => {
-        axios
+        request
           .get("http://localhost:8000/totalKeyword", {
             params: config,
           })
@@ -43,7 +43,7 @@ export const useFetchKeywords = () => {
             setTotalKeyword(res.data);
           })
           .catch((err) => {
-            toast.error("Something went wrong!");
+            myToast("error");
             blockUiSwitcher();
             console.log(err);
           })
@@ -55,7 +55,7 @@ export const useFetchKeywords = () => {
 
   const fetchKeywordFull = (idx: number | string | any) => {
     blockUiSwitcher();
-    axios
+    request
       .get("http://localhost:8000/searchKeywordFull", {
         params: { idx: state.results[idx]["id"] },
       })
@@ -63,7 +63,7 @@ export const useFetchKeywords = () => {
         setSelectedDataResult(res.data);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })
@@ -83,7 +83,7 @@ export const useFetchKeywords = () => {
       sortingBy: formatSorting(sorting),
       skip: skip,
     };
-    axios
+    request
       .get("http://localhost:8000/searchKeywords", {
         params: config,
       })
@@ -92,7 +92,7 @@ export const useFetchKeywords = () => {
         setResult(newResult);
       })
       .catch((err) => {
-        toast.error("Something went wrong!");
+        myToast("error");
         blockUiSwitcher();
         console.log(err);
       })

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LayoutContext } from "../components/layouts";
-import toast from "react-hot-toast";
+import myToast from "../lil/toast";
 
 export const useModalResult = () => {
   const layoutContext = useContext(LayoutContext);
@@ -30,7 +30,10 @@ export const useModalResult = () => {
     if (direction === "next") {
       let nextIdx = Number(layoutContext.state.selectedResultIdx) + 1;
       if (nextIdx >= layoutContext.state.results.length) {
-        toast.error("No more result to view, Please get search more");
+        myToast(
+          "custom_error",
+          "No more result to view, Please scroll or search more"
+        );
         return;
       }
       setSelectedIndex(nextIdx);
@@ -38,7 +41,10 @@ export const useModalResult = () => {
       let nextIdx = Number(layoutContext.state.selectedResultIdx) - 1;
 
       if (nextIdx === -1) {
-        toast.error("No more result to view, Please get search more");
+        myToast(
+          "custom_error",
+          "No more result to view, Please scroll or search more"
+        );
         return;
       }
       setSelectedIndex(nextIdx);

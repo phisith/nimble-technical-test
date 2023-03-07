@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { LayoutContext } from "../components/layouts";
-import toast from "react-hot-toast";
-import axios from "axios";
 import { randomNumber } from "../helper/randomNumber";
 import { getTodayFull } from "../helper/moment";
 import { useBlockUi } from "./useBlockUi";
 import { useResults } from "./useResults";
 import { formatSorting } from "../helper/format";
+import request from "../lil/request";
+import myToast from "../lil/toast";
 
 export const useSendCSV = () => {
   const { state, dispatch } = useContext(LayoutContext);
@@ -23,7 +23,7 @@ export const useSendCSV = () => {
   const sendCSV = () => {
     if (state.data && state.data.length > 0) {
       blockUiSwitcher();
-      axios
+      request
         .post("http://localhost:8000/import_csv", {
           data: state.data,
           insertCode: insertCode,
@@ -33,7 +33,7 @@ export const useSendCSV = () => {
         })
         .catch((err) => {
           console.log(err);
-          toast.error("Something went wrong!");
+          myToast("error");
           blockUiSwitcher();
           return;
         })
@@ -43,7 +43,7 @@ export const useSendCSV = () => {
             sortingBy: formatSorting(),
           };
 
-          axios
+          request
             .get("http://localhost:8000/searchKeywords", {
               params: config,
             })
@@ -52,7 +52,7 @@ export const useSendCSV = () => {
               setTotalKeyword(res.data.length);
             })
             .catch((err) => {
-              toast.error("Something went wrong!");
+              myToast("error");
               blockUiSwitcher();
               console.log(err);
             })
@@ -62,7 +62,7 @@ export const useSendCSV = () => {
             });
         });
     } else {
-      toast.error("There is no data to send");
+      myToast("custom_error", "There is no data to send");
       return;
     }
   };

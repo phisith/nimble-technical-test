@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
-import toast from "react-hot-toast";
 import Papa from "papaparse";
+import myToast from "../lil/toast";
 
 export const parseCSVToJson = (
   e: ChangeEvent<HTMLInputElement>,
@@ -8,7 +8,7 @@ export const parseCSVToJson = (
 ) => {
   const file = e.target.files;
   if (file && file.length > 1) {
-    toast.error("This upload only one file");
+    myToast("custom_error", "This upload only one file");
     return;
   }
 
@@ -19,7 +19,7 @@ export const parseCSVToJson = (
       worker: true,
       complete(results) {
         if (results.data.length > 100) {
-          toast.error("Keywords is more than 100");
+          myToast("custom_error", "Keywords is more than 100");
           return;
         }
         setFunction(results.data);

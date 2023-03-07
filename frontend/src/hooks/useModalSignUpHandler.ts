@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ModalSignUpContext } from "../components/modals/modalSignUp";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import request from "../lil/request";
+import myToast from "../lil/toast";
 
 export const useModalSignUpHandler = () => {
   const modalSignUpContext = useContext(ModalSignUpContext);
@@ -15,9 +15,9 @@ export const useModalSignUpHandler = () => {
   };
 
   const createUser = async (userInfo: any) => {
-    toast
+    myToast("promise")
       .promise(
-        axios.post("http://localhost:8000/createUser", {
+        request.post("http://localhost:8000/createUser", {
           userInfo,
         }),
         {
@@ -26,15 +26,15 @@ export const useModalSignUpHandler = () => {
           error: "Something went wrong",
         }
       )
-      .then((res) => {
+      .then((res: any) => {
         return res;
       });
   };
 
   const login = (userInfo: any) => {
-    toast
+    myToast("promise")
       .promise(
-        axios.get("http://localhost:8000/login", {
+        request.get("http://localhost:8000/login", {
           params: { userInfo: userInfo },
         }),
         {
@@ -43,12 +43,14 @@ export const useModalSignUpHandler = () => {
           error: "Username or password might be wrong",
         }
       )
-      .then((res) => {
+      .then((res: { data: { key: string } }) => {
         sessionStorage.setItem("key", res.data.key);
+        request.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${sessionStorage.getItem("key")}`;
         navigate("/home");
-        axios.defaults.headers.common["Authorization"] = res.data.key;
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
       });
   };
