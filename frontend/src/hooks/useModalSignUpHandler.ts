@@ -27,6 +27,7 @@ export const useModalSignUpHandler = () => {
         }
       )
       .then((res: any) => {
+        modalSignUpSwitcher();
         return res;
       });
   };

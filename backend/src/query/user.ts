@@ -1,18 +1,16 @@
 import { PrismaClient } from "@prisma/client";
-import { findUser } from "./Read";
-// import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
-export const InsertKeywordResultBulk = async (keywords: any[]) => {
+
+export const findUser = async (userInfo: any) => {
   try {
-    return prisma.scrapingData.createMany({
-      data: keywords,
+    return prisma.user.findUnique({
+      where: { userName: userInfo.userName },
     });
   } catch (err) {
     console.log(err);
   }
 };
-
 export const InsertNewUser = async (userInfo: any) => {
   // userInfo.password = await bcrypt.hashSync(userInfo.password, 12);
   const user: any = await findUser(userInfo);
