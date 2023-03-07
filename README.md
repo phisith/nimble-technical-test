@@ -69,7 +69,7 @@ Fill in your information and click sign up to register, after that just sign up 
 
 ### and also you can click on the list to see the full result:
 
-![full result.png](image%2Ffull%20result.png)
+![full resul new.png](image%2Ffull%20resul%20new.png)
 
 4. This is history page:
 
