@@ -30,6 +30,25 @@ const TableUltimate = () => {
   const { fetchKeywords, fetchMoreKeywords } = useFetchKeywords();
   const columns = useMemo<ColumnDef<ResultType | any>[]>(
     () => [
+      {
+        accessorKey: "status",
+        header: "status",
+        cell: (info) => (
+          <>
+            <div>
+              {info.getValue() === "p" ? (
+                <p className={"p-2 rounded bg-gray-700 text-white rounded"}>
+                  Pending
+                </p>
+              ) : info.getValue() === "s" ? (
+                <p className={"p-2 rounded bg-green-700 text-white"}>Success</p>
+              ) : (
+                <p className={"p-2 rounded bg-red-700 text-white"}>Fail</p>
+              )}
+            </div>
+          </>
+        ),
+      },
       { accessorKey: "keyword", header: "Keyword" },
       { accessorKey: "adWords", header: "Total AdWord" },
       { accessorKey: "totalLink", header: "Total Link" },

@@ -21,6 +21,7 @@ model ScrapingData {
   result     BigInt?
   resultTime String?
   htmlCode   String?
+  status     String?
 }
 
 model User {

@@ -59,12 +59,50 @@ export const useSendCSV = () => {
             .finally(() => {
               setInsertCode(insertCode);
               blockUiSwitcher();
+              startScraping(config);
             });
         });
     } else {
       myToast("custom_error", "There is no data to send");
       return;
     }
+  };
+
+  const startScraping = (config: {}) => {
+    let newConfig: any = config;
+    newConfig["isLongPoll"] = true;
+    request
+      .get("http://localhost:8000/scrapingJob")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        myToast("error");
+        console.log(err);
+      })
+      .finally(async () => {
+        let errorCheck = false;
+        while (true) {
+          await request
+            .get("http://localhost:8000/searchKeywords", {
+              params: newConfig,
+            })
+            .then((res) => {
+              console.log(res);
+              setResult(res.data);
+              setTotalKeyword(res.data.length);
+            })
+            .catch((err) => {
+              errorCheck = true;
+              myToast("error");
+              console.log(err);
+            });
+          if (errorCheck) {
+            myToast("error");
+            break;
+          }
+        }
+      });
   };
   return { sendCSV };
 };

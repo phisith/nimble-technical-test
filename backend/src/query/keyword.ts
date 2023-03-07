@@ -12,6 +12,14 @@ export const InsertKeywordResultBulk = async (keywords: any[]) => {
   }
 };
 
+export const UpdateKeywordResult = async (query) => {
+  try {
+    return prisma.scrapingData.update(query);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const searchKeywords = async (
   searchKey: {},
   sortingBy: {},
@@ -30,6 +38,7 @@ export const searchKeywords = async (
         totalLink: true,
         result: true,
         resultTime: true,
+        status: true,
       },
       orderBy: sortingBy,
     });

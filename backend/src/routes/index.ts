@@ -6,6 +6,7 @@ import {
   getTotalKeyword,
   createUser,
   login,
+  scrapingJob,
 } from "../controllers";
 import { authenticateToken } from "../middleware/jwtAuth";
 
@@ -21,6 +22,8 @@ router.get("/searchKeywords", authenticateToken, getKeywords);
 router.get("/searchKeywordFull", authenticateToken, getKeywordFull);
 
 router.get("/totalKeyword", authenticateToken, getTotalKeyword);
+
+router.get("/scrapingJob", authenticateToken, scrapingJob);
 
 router.get("/login", login);
 
